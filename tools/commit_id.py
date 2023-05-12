@@ -35,9 +35,6 @@ for repo in repos:
         break
 
 final_hash = final_hash.rstrip('-')
-hfile = open(output_file, 'w')
-
-hfile.write('#define NW_COMMIT_HASH "%s"\n'    % final_hash)
-hfile.write('#define NW_COMMIT_HASH_SIZE %d\n' % len(final_hash))
-
-hfile.close()
+with open(output_file, 'w') as hfile:
+    hfile.write('#define NW_COMMIT_HASH "%s"\n'    % final_hash)
+    hfile.write('#define NW_COMMIT_HASH_SIZE %d\n' % len(final_hash))

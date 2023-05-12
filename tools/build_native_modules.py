@@ -44,10 +44,7 @@ opts, args = parser.parse_args()
 if opts.target:
   target = opts.target
 
-exec_args = ['nw-gyp',
-             'configure',
-             '--target=%s'%(target),
-             'build']
+exec_args = ['nw-gyp', 'configure', f'--target={target}', 'build']
 
 win = sys.platform in ('win32', 'cygwin')
 

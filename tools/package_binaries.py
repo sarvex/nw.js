@@ -153,25 +153,16 @@ def generate_target_nw(platform_name, arch, version):
     return target
 
 def generate_target_chromedriver(platform_name, arch, version):
-    target = {}
-    # Output
-    target['output'] = ''.join([
-                       'chromedriver-nw-',
-                       'v', version,
-                       '-', platform_name,
-                       '-', arch])
-    # Compress type
-    if platform_name == 'linux':
-        target['compress'] = 'tar.gz'
-    else:
-        target['compress'] = 'zip'
-    # Input
-    if platform_name == 'win':
-        target['input'] = ['chromedriver.exe']
-    else:
-        target['input'] = ['chromedriver']
-    target['folder'] = True # always create a folder
-    return target
+    return {
+        'output': ''.join(
+            ['chromedriver-nw-', 'v', version, '-', platform_name, '-', arch]
+        ),
+        'compress': 'tar.gz' if platform_name == 'linux' else 'zip',
+        'input': ['chromedriver.exe']
+        if platform_name == 'win'
+        else ['chromedriver'],
+        'folder': True,
+    }
 
 def generate_target_symbols(platform_name, arch, version):
     target = {}

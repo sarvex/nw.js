@@ -9,11 +9,7 @@ from platform import platform
 import socket
 from sys import argv
 
-port = 13013
-if len(argv) >= 2:
-    port = int(argv[1])
-
-
+port = int(argv[1]) if len(argv) >= 2 else 13013
 path = os.path
 dirname = path.abspath(path.dirname(__file__))
 chromedriver_path = path.join(dirname,"chromedriver2_server")
@@ -40,15 +36,11 @@ def kill_process_tree(pid):
         for child in parent.get_children(recursive=True):
             child.kill()
         parent.kill()
-        return
     elif 'Windows' in machine_type:
         import subprocess
         dev_null = open(os.devnull,"wb")
         subprocess.Popen(['taskkill', '/F', '/T', '/PID', str(pid)],stdout=dev_null,stderr=dev_null)
-        return
-    else:
-        # print "Unknow OS type"
-        return
+    return
 
 time.sleep(2)
 spid = nw.service.process.pid

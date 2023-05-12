@@ -13,9 +13,8 @@ def update_uvh(tmp_dir, header_files):
     rfile = open(header_f, 'r')
     old = rfile.read()
     new = re.sub('third_party/node/deps/uv/include/uv.h', 'uv.h', old, 0)
-    wfile = open(header_f, 'w')
-    wfile.write(new)
-    wfile.close()
+    with open(header_f, 'w') as wfile:
+      wfile.write(new)
   return
 
 script_dir = os.path.dirname(__file__)
